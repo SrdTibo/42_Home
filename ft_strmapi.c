@@ -11,16 +11,7 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	i;
-	char	*chaine;
-
-	chaine = s;
-	i = 0;
-	while (i < n)
-	{
-		chaine[i] = 0;
-		i++;
-	}
+	
 }

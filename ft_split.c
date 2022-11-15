@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
-#include <stdlib.h>
 
 int nmbr_colums(char const *s, char sep)
 {
@@ -96,6 +95,8 @@ char **ft_split(char const *s, char sep)
 	int	i;
 
 	i = 0;
+	if (s == NULL)
+		return (NULL);
 	tab = alloc_lignes(s, sep, tab);
 	tab = allocation(s, sep, tab);
 	if(tab == NULL || nmbr_colums (s, sep) == 0)

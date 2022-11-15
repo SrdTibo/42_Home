@@ -3,7 +3,6 @@
 
  int main(void)
 {
-    int n = 845;
-    printf("%s",ft_itoa(n));
+    printf("%s",ft_itoa(0));
     return (0);
 }

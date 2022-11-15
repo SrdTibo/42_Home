@@ -11,19 +11,24 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
+
 int nombre_chiffre(n)
 {
    	int count;
 
 	count = 0;
+	if (n < 0)
+	{
+		count++;
+		n = n * -1;
+	}
    	while(n!=0)  
    	{  
    	    n=n/10;  
    	    count++;
    	}
 	return(count);
-}  
+} 
 
 char	convertion(int p)
 {
@@ -33,33 +38,27 @@ char	convertion(int p)
 	return(n);
 }
 
-char *ft_itoa(int n)
+char *ft_itoa(int m)
 {
 	char *str;
-	int	o;
-	int	p;
+	int	c;
 	int	i;
 
-	i = 0;
-	str = malloc(sizeof(char) * n);
+	i = nombre_chiffre(m);
+	str = malloc(sizeof(char) * nombre_chiffre(m) + 1);
+	str[i] = '\0';
 	if (str == NULL)
 		return(0);
-	if (n < 0)
+	if (m < 0)
 		{
-			str[i] = '-';
-			i++;
-			n = n * -1;
+			str[0] = '-';
+			m = m * -1;
 		}
-	while(i < nombre_chiffre(n))
+	while(m > 0)
 	{
-		if ((n >= 0) && (n < 10))
-			str[i++] = convertion(n);
-		else
-		{
-			o = n / 10;
-			p = n % 10;
-			str[i++] = convertion(p);
-		}
+		c = m % 10;
+		str[--i] = convertion(c);
+		m = (m - c) / 10; //http://villemin.gerard.free.fr/aInforma/081Chiff.htm
 	}
 	return(str);
 }

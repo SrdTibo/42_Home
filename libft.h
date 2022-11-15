@@ -13,6 +13,7 @@
 #ifndef	_LIBFT_H_
 #define	_LIBFT_H_
 #include <string.h>
+#include <stdlib.h>
 
 int ft_isalpha(int c);
 int ft_isdigit(int c);
@@ -37,9 +38,10 @@ char *ft_strnstr(const char *haystack, const char *needle, size_t len);
 int ft_atoi( const char * theString );
 void *ft_calloc(size_t elementCount, size_t elementSize );
 char *ft_strdup(const char *s1);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char *ft_substr(char const *s, unsigned int start, size_t len);
 char *ft_strjoin(char const *s1, char const *s2);
 char *ft_strtrim(char const *s1, char const *set);
 char **ft_split(char const *s, char sep);
 char *ft_itoa(int n);
+char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 #endif
