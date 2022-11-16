@@ -3,6 +3,8 @@
 
  int main(void)
 {
-    printf("%s",ft_itoa(0));
+    //char str[] = "hello comment ca va";
+    int  nmbr = 3;
+    printf("%d",putchar(nmbr));
     return (0);
 }

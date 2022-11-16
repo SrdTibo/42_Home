@@ -41,7 +41,7 @@ char **alloc_lignes(char const *s, char sep, char **tab)
 	t = 0;
 	i = 0;
 	compt = 0;
-	tab = malloc(nmbr_colums(s, sep) * sizeof(char *));
+	tab = malloc(nmbr_colums(s, sep) * sizeof(char *) + 1);
 	if (tab == NULL)
 		return(0);
 	while(i < nmbr_colums(s, sep))
@@ -54,7 +54,7 @@ char **alloc_lignes(char const *s, char sep, char **tab)
 			compt++;
 			t++;
 		}
-		tab[i++] = malloc((compt) * sizeof(char));
+		tab[i++] = malloc((compt) * sizeof(char) + 1);
 	}
 	return(tab);
 }

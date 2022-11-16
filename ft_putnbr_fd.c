@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putnr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tserdet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,38 +11,36 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-static int	ft_strleon(const char *str)
+void	convertionn(int p, int fd)
 {
-	int	i;
+	char	n;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	n = 48 + p;
+	write(fd, &n, 1);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void ft_putnbr_fd(int n, int fd)
 {
-	int		i;
-	int		t;
-	int		lenght;
-	char	*pointeur;
+	int	o;
+	int	p;
 
-	i = 0;
-	t = 0;
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	lenght = ft_strleon(s1) + ft_strleon(s2);
-	pointeur = malloc(lenght * sizeof(char) + 1);
-	if (pointeur == NULL)
-		return (NULL);
-	while (s1[i])
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else
 	{
-		pointeur[i] = s1[i];
-		i++;
+		if (n < 0)
+		{
+			write(fd, "-", 1);
+			n = n * -1;
+		}
+		if ((n > -1) && (n < 10))
+			convertionn(n, fd);
+		else
+		{
+			o = n / 10;
+			p = n % 10;
+			ft_putnbr_fd(o, fd);
+			convertionn(p, fd);
+		}
 	}
-	while (s2[t])
-		pointeur[i++] = s2[t++];
-	pointeur[i] = '\0';
-	return (pointeur);
 }
