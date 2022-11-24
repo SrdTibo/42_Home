@@ -9,3 +9,11 @@
 /*   Updated: 2022/10/31 16:21:07 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libftprintf.h"
+
+int ft_printf(const char *str, ...)
+{
+	va_list		args;
+	va_start	(args, str);
+}

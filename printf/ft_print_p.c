@@ -10,80 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libftprintf.h"
 
-int	ft_print_p(void *)
+static	int	rev_print(char *str)
 {
-	int ft_strlength(char *str);
-	int ft_error(char *str);
+	int	i;
+	int	t;
 
-	int ft_strlength(char *str)
+	i = 0;
+	t = 0;
+	while (str[i])
+		i++;
+	t = i;
+	while (i >= 0)
 	{
-		int i;
-
-		i = 0;
-		while (str[i] != '\0')
-			i++;
-		return (i);
+		ft_putchar(str[i]);
+		i--;
 	}
-
-	int ft_error(char *str)
-	{
-		int i;
-		int j;
-
-		i = 0;
-		j = 1;
-		if (str[i] == 0 || ft_strlength(str) == 1)
-			return (0);
-		if (str[i] == '+' || str[i] == '-')
-			return (0);
-		while (i < (ft_strlength(str) - 1))
-		{
-			while (j < ft_strlength(str))
-			{
-				if (str[i] == str[j])
-				return (0);
-				j++;
-			}
-			i++;
-			j = i + 1;
-		}
-		return (1);
-	}
-
-	void ft_putnbr_base(int nbr, char *base)
-	{
-		int j;
-		int i;
-		unsigned int resultat;
-		unsigned int nombres;
-
-		i = 0;
-		resultat = 0;
-		j = ft_strlength(base);
-		if (ft_error(base) != 0)
-		{
-			if (nbr < 0)
-			{
-				write(1, "-", 1);
-				nombres = -nbr;
-			}
-			else
-				nombres = nbr;
-			resultat = nombres % j;
-			nombres = nombres / j;
-			if (nombres != 0)
-				ft_putnbr_base(nombres, base);
-			write(1, &base[resultat], 1);
-		}
-	}
+	return (t);
 }
 
-int main(void)
+int	ft_print_p(int nbr)
 {
-	char *a = "sdovuubsv";
-	ft_print_s(a);
-    return 0;
+	char	*str;
+	int		rest;
+	int		i;
+
+	i = 0;
+	rest = 0;
+	str = malloc(13 * sizeof(char));
+	if (!str)
+		return (0);
+	while (nbr != 0)
+	{
+		rest = nbr % 16;
+		if (rest < 10)
+			str[i++] = 48 + rest;
+		else if (rest >= 10)
+			str[i++] = 55 + rest;
+		nbr = nbr / 16;
+	}
+	str[i] = '\0';
+	ft_putchar('0');
+	ft_putchar('x');
+	rest = rev_print(str);
+	return (rest);
 }

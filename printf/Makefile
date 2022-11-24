@@ -1,5 +1,7 @@
 NAME = libftprintf.a
-SRC	= ft_print_c.c\
+SRC	= ft_extra_function.c ft_print_c.c ft_print_d.c ft_print_i.c\
+ft_print_modulo.c ft_print_p.c ft_print.s.c ft_print_u.c ft_print_x.c\
+ft_print_xbis.c ft_printf.c\
 
 OBJ	= $(SRC:.c=.o)
 

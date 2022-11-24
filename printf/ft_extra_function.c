@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tserdet <thibault@42.fr>                     +#+  +:+       +#+      */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 15:45:57 by tserdet           #+#    #+#             */
-/*   Updated: 2022/10/31 16:21:07 by tserdet          ###   ########.fr       */
+/*   Created: 2022/07/13 13:47:53 by tserdet           #+#    #+#             */
+/*   Updated: 2022/07/20 08:50:53 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_print_s(char *c)
+void	ft_putchar(char c)
 {
-	int	i;
-
-	i = 0;
-	while (c[i])
-	{
-		ft_putchar(c[i]);
-		i++;
-	}
-	return (i);
+	int	number;
+	write(1, &c, 1);
 }

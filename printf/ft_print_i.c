@@ -10,11 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
 #include "libftprintf.h"
 
-void	convertion(int p)
+static	void	convertion(int p)
 {
 	char	n;
 
@@ -22,7 +20,7 @@ void	convertion(int p)
 	ft_print_c(n);
 }
 
-int	nbr_figure(int n)
+static	int	nbr_figure(int n)
 {
 	int	count;
 
@@ -59,5 +57,5 @@ int	ft_print_i(int nb)
 		ft_print_i(o);
 		convertion(p);
 	}
-	return(nbr_figure(nb));
+	return (nbr_figure(nb));
 }

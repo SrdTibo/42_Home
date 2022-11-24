@@ -10,9 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-int ft_print_modulo()
+int	ft_print_modulo(void)
 {
-	
+	char	a;
+
+	a = '%';
+	ft_putchar(a);
+	return (1);
 }

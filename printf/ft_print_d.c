@@ -14,15 +14,15 @@
 #include <stdlib.h>
 #include "libftprintf.h"
 
-void	convertion(int p)
+static	void	convertion(int p)
 {
 	char	n;
 
 	n = 48 + p;
-	ft_print_c(n);
+	ft_putchar(n);
 }
 
-int	nbr_figure(int n)
+static	int	nbr_figure(int n)
 {
 	int	count;
 
@@ -47,7 +47,7 @@ int	ft_print_d(int nb)
 
 	if (nb < 0)
 	{
-		ft_print_c('-');
+		ft_putchar('-');
 		nb = nb * -1;
 	}
 	if ((nb > -1) && (nb < 10))
@@ -59,5 +59,5 @@ int	ft_print_d(int nb)
 		ft_print_d(o);
 		convertion(p);
 	}
-	return(nbr_figure(nb));
+	return (nbr_figure(nb));
 }
