@@ -11,9 +11,24 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <stdio.h>
 
 int ft_printf(const char *str, ...)
 {
-	va_list		args;
-	va_start	(args, str);
+	int	i;
+	int	compt;
+	
+	i = 0;
+	compt = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '%')
+			compt++;
+		i++;
+	}
+	return(compt);
+}
+int main (void)
+{
+		printf("%d", ft_printf("%d", "%d"));
 }
