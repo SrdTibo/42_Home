@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+#include <stdlib.h>
 
 static int	ft_strleon(const char *str)
 {
@@ -29,7 +30,7 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	taille = ft_strleon(s1);
-	pointeur = malloc(taille * sizeof(char) + 1);
+	pointeur = malloc(taille * sizeof(char));
 	if (pointeur == NULL)
 		return (NULL);
 	while (s1[i])

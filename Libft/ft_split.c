@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+#include <stdlib.h>
 
 int nmbr_colums(char const *s, char sep)
 {
@@ -41,7 +42,7 @@ char **alloc_lignes(char const *s, char sep, char **tab)
 	t = 0;
 	i = 0;
 	compt = 0;
-	tab = malloc(nmbr_colums(s, sep) * sizeof(char *) + 1);
+	tab = malloc(nmbr_colums(s, sep) * sizeof(char *));
 	if (tab == NULL)
 		return(0);
 	while(i < nmbr_colums(s, sep))
@@ -54,7 +55,7 @@ char **alloc_lignes(char const *s, char sep, char **tab)
 			compt++;
 			t++;
 		}
-		tab[i++] = malloc((compt) * sizeof(char) + 1);
+		tab[i++] = malloc((compt) * sizeof(char));
 	}
 	return(tab);
 }
@@ -95,8 +96,6 @@ char **ft_split(char const *s, char sep)
 	int	i;
 
 	i = 0;
-	if (s == NULL)
-		return (NULL);
 	tab = alloc_lignes(s, sep, tab);
 	tab = allocation(s, sep, tab);
 	if(tab == NULL || nmbr_colums (s, sep) == 0)

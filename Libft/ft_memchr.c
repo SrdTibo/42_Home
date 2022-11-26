@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
-
+#include <string.h>
 
 void	*ft_memchr(const void *memoryBlock, int searchedChar, size_t size )
 {
@@ -19,9 +19,9 @@ void	*ft_memchr(const void *memoryBlock, int searchedChar, size_t size )
 
 	string = (const unsigned char *) memoryBlock;
 	i = 0;
-	while (i < size)
+	while (string[i] || i < size)
 	{
-		if (string[i] == (const unsigned char) searchedChar)
+		if (string[i] == (const unsigned char)searchedChar)
 			return ((void *)&string[i]);
 		i++;
 	}
