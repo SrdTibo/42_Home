@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static	void	convertion(unsigned int g)
 {

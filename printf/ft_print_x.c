@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static	int	rev_print(char *str)
 {
@@ -30,7 +30,7 @@ static	int	rev_print(char *str)
 	return (t);
 }
 
-int	print_x(int nbr)
+int	ft_print_x(int nbr)
 {
 	char	*str;
 	int		rest;
