@@ -1,0 +1,9 @@
+1un
+2deux
+3trois
+4quatres
+5cinq
+6six
+7sept
+8huit
+9neuf
