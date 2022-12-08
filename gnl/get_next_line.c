@@ -6,7 +6,7 @@
 /*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 10:30:55 by tserdet           #+#    #+#             */
-/*   Updated: 2022/12/07 17:10:00 by tserdet          ###   ########.fr       */
+/*   Updated: 2022/12/08 11:26:41 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,14 @@ char	*clear_stat(char	*stat, char *final_line_result)
 	int		i;
 	int		t;
 	char	*rest;
+	int		size_rest;
 
 	i = 0;
 	t = 0;
-	rest = malloc((ft_strlen(stat) - ft_strlen(final_line_result))* sizeof(char) + 1);
+	size_rest = ft_strlen(stat) - ft_strlen(final_line_result);
+	rest = malloc(size_rest * sizeof(char) + 1);
+	if (!rest)
+		return (NULL);
 	while(stat[i] != '\0' && stat[i] != '\n')
 		i++;
 	i++;
@@ -84,6 +88,8 @@ char	*get_next_line(int fd)
 	char			*final_line_result;
 
 	i = 0;
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return(NULL);
 	stat = read_join(fd, stat);
 	final_line_result = return_line(stat);
 	if (final_line_result == NULL)
