@@ -6,7 +6,7 @@
 /*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:50:38 by tserdet           #+#    #+#             */
-/*   Updated: 2022/12/07 15:55:01 by tserdet          ###   ########.fr       */
+/*   Updated: 2022/12/08 13:05:23 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	ft_strlen(char *str)
 	int	i;
 
 	i = 0;
-	if (str == NULL)
-		return(0);
+	if (!str)
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
@@ -72,11 +72,9 @@ char	*ft_strjoin(char *s1, char *buf)
 
 	i = 0;
 	t = 0;
-	if ((s1 == NULL && buf == NULL) || buf == NULL)
-		return (NULL);
 	lenght = ft_strlen(s1) + ft_strlen(buf);
 	pointeur = ft_calloc(lenght , sizeof(char) + 1);
-	if (pointeur == NULL)
+	if (!pointeur)
 		return (NULL);
 	if (s1 != NULL)
 	{

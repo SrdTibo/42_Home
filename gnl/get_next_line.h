@@ -6,7 +6,7 @@
 /*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 10:29:56 by tserdet           #+#    #+#             */
-/*   Updated: 2022/12/07 15:49:05 by tserdet          ###   ########.fr       */
+/*   Updated: 2022/12/08 13:39:05 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <stdlib.h>
 # include <string.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE (30)
+#  define BUFFER_SIZE (10)
 #endif
 
 char	*read_join(int	fd, char *stat);
