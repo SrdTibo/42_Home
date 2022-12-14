@@ -1,0 +1,22 @@
+NAME = minitalk.a
+
+CFLAGS = -Wall -Wextra -Werror
+
+SRC	= client.c server.c\
+
+OBJ	= $(SRC:.c=.o)
+
+all : 		$(NAME)
+	
+$(NAME) : 	$(OBJ)
+	ar -rcs $(NAME) $(OBJ)
+
+clean :
+	rm -rf $(OBJ)
+
+fclean :	clean
+	rm -f $(NAME)
+
+re :		fclean all
+
+.PHONY :	all clean fclean re
