@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putnr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tserdet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,13 +11,36 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-void	*ft_calloc(size_t elementCount, size_t elementSize )
+void	convertionn(int p, int fd)
 {
-	char	*pointeur;
+	char	n;
 
-	pointeur = (void *) malloc(elementCount * elementSize);
-	if (!pointeur)
-		return (NULL);
-	ft_bzero(pointeur, (elementCount * elementSize));
-	return (pointeur);
+	n = 48 + p;
+	write(fd, &n, 1);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	int	o;
+	int	p;
+
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else
+	{
+		if (n < 0)
+		{
+			write(fd, "-", 1);
+			n = n * -1;
+		}
+		if ((n > -1) && (n < 10))
+			convertionn(n, fd);
+		else
+		{
+			o = n / 10;
+			p = n % 10;
+			ft_putnbr_fd(o, fd);
+			convertionn(p, fd);
+		}
+	}
 }

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
-#include <stdlib.h>
 
 static int	ft_strleon(const char *str)
 {
@@ -31,21 +30,19 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	t = 0;
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
 	lenght = ft_strleon(s1) + ft_strleon(s2);
-	pointeur = malloc(lenght * sizeof(char));
+	pointeur = malloc(lenght * sizeof(char) + 1);
 	if (pointeur == NULL)
 		return (NULL);
-	while (s1[i] != '\0')
+	while (s1[i])
 	{
 		pointeur[i] = s1[i];
 		i++;
 	}
-	while (s2[i] != '\0')
-	{
-		pointeur[i] = s2[t];
-		i++;
-		t++;
-	}
+	while (s2[t])
+		pointeur[i++] = s2[t++];
 	pointeur[i] = '\0';
 	return (pointeur);
 }

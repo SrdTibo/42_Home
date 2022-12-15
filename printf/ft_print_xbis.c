@@ -12,45 +12,28 @@
 
 #include "ft_printf.h"
 
-static	int	rev_print(char *str)
+int	ft_print_xbis(unsigned int nb, int *verification)
 {
-	int	i;
-	int	t;
-
-	i = 0;
-	t = 0;
-	while (str[i])
-		i++;
-	t = i;
-	while (i >= 0)
-	{
-		ft_putchar(str[i]);
-		i--;
-	}
-	return (t);
-}
-
-int	ft_print_xbis(int nbr)
-{
+	int		resultat;
 	char	*str;
-	int		rest;
 	int		i;
+	char	*base;
 
-	i = 0;
-	rest = 0;
-	str = malloc(13 * sizeof(char));
+	base = "0123456789ABCDEF";
+	i = ft_nombre_chiffre(nb);
+	resultat = 0;
+	str = NULL;
+	str = (char *) malloc(sizeof(char) * (i + 1));
 	if (!str)
-		return (0);
-	while (nbr != 0)
+		return (verification_hexa(verification));
+	str[i] = 0;
+	while (i > 0)
 	{
-		rest = nbr % 16;
-		if (rest < 10)
-			str[i++] = 48 + rest;
-		else if (rest >= 10)
-			str[i++] = 55 + rest;
-		nbr = nbr / 16;
+		resultat = nb % 16;
+		nb = nb / 16;
+		str[--i] = base[resultat];
 	}
-	str[i] = '\0';
-	rest = rev_print(str);
-	return (rest);
+	i = ft_print_s(str, verification);
+	free(str);
+	return (i);
 }

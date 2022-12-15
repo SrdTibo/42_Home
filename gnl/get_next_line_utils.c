@@ -6,7 +6,7 @@
 /*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 11:50:38 by tserdet           #+#    #+#             */
-/*   Updated: 2022/12/08 13:05:23 by tserdet          ###   ########.fr       */
+/*   Updated: 2022/12/08 15:31:37 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ int	check_slash_n(char *stat)
 	int	i;
 
 	i = 0;
+	if (!stat)
+		return (0);
 	while (stat[i] != '\0')
 	{
 		if (stat[i] == '\n')
-			return(i);
+			return (i);
 		i++;
 	}
 	return (0);
@@ -58,9 +60,12 @@ int	ft_strlen(char *str)
 	i = 0;
 	if (!str)
 		return (0);
-	while (str[i])
-		i++;
-	return (i);
+	else
+	{
+		while (str[i])
+			i++;
+		return (i);
+	}
 }
 
 char	*ft_strjoin(char *s1, char *buf)
@@ -73,7 +78,7 @@ char	*ft_strjoin(char *s1, char *buf)
 	i = 0;
 	t = 0;
 	lenght = ft_strlen(s1) + ft_strlen(buf);
-	pointeur = ft_calloc(lenght , sizeof(char) + 1);
+	pointeur = ft_calloc(sizeof(char) + 1, lenght);
 	if (!pointeur)
 		return (NULL);
 	if (s1 != NULL)
@@ -87,6 +92,7 @@ char	*ft_strjoin(char *s1, char *buf)
 	while (buf[t])
 		pointeur[i++] = buf[t++];
 	pointeur[i] = '\0';
-	free(s1);
+	if (s1)
+		free(s1);
 	return (pointeur);
 }

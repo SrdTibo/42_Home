@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_printf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,23 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdarg.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdarg.h>
 
-#ifndef LIBFT_PRINTF_H
-# define LIBFT_PRINTF_H
-
-int			ft_putchar(char c);
-int				ft_print_c(char c);
-int				ft_print_s(char *c);
-int				ft_print_d(int nbr);
-int				ft_print_i(int nbr);
-unsigned int	ft_print_u(unsigned	int nb);
-int				ft_print_modulo(void);
-int				ft_print_x(int nbr);
-int				ft_print_xbis(int nbr);
-int				ft_print_p(int nbr);
-int				ft_printf(const char *, ...);
-
+int				ft_strlen(char *c);
+int				ft_nombre_chiffre(unsigned int n);
+int				ft_nombre_chiffre_p(unsigned long long n);
+int				verification_hexa(int *verification);
+int				ft_print_c(char c, int *verification);
+int				ft_print_s(char *c, int *verification);
+int				ft_print_d(int nbr, int *verification);
+int				ft_print_i(int nbr, int *verification);
+unsigned int	ft_print_u(unsigned	int nb, int *verification);
+int				ft_print_modulo(int *verification);
+int				ft_print_x(unsigned int nb, int *verification);
+int				ft_print_xbis(unsigned int nb, int *verification);
+int				ft_print_p(unsigned long long nb, int *verification);
+int				ft_printf(const char *str, ...);
 #endif

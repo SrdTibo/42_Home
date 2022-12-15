@@ -1,26 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tserdet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/31 16:10:27 by tserdet           #+#    #+#             */
-/*   Updated: 2022/11/02 09:26:57 by tserdet          ###   ########.fr       */
+/*   Created: 2022/07/23 14:54:02 by tserdet           #+#    #+#             */
+/*   Updated: 2022/07/23 16:23:56 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_putchar_fd(char c, int fd)
 {
-	size_t	i;
-	char	*chaine;
-
-	chaine = s;
-	i = 0;
-	while (i < n)
-	{
-		chaine[i] = 0;
-		i++;
-	}
+	write (fd, &c, 1);
 }

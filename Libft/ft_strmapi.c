@@ -1,39 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 10:11:40 by tserdet           #+#    #+#             */
-/*   Updated: 2022/11/02 10:11:43 by tserdet          ###   ########.fr       */
+/*   Created: 2022/10/31 16:10:27 by tserdet           #+#    #+#             */
+/*   Updated: 2022/11/02 09:26:57 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-void	*ft_memmove(void *d, const void *s, size_t size)
+int	ft_strlenen(const char *str)
 {
-	size_t		i;
-	const char	*chaine_source;
-	char		*chaine_dest;
+	int	i;
 
 	i = 0;
-	chaine_dest = d;
-	chaine_source = s;
-	if (chaine_dest == 0 && chaine_source == 0)
-		return (chaine_dest);
-	if (chaine_dest > chaine_source)
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	unsigned int	i;
+	char			*str;
+
+	i = 0;
+	if (s == NULL)
+		return (NULL);
+	str = malloc(sizeof(char) * ft_strlenen(s) + 1);
+	if (str == NULL)
+		return (NULL);
+	while (s[i])
 	{
-		while (size-- > 0)
-			chaine_dest[size] = chaine_source[size];
+		str[i] = f(i, s[i]);
+		i++;
 	}
-	else
-	{
-		while (i < size)
-		{
-			chaine_dest[i] = chaine_source[i];
-			i++;
-		}
-	}
-	return (chaine_dest);
+	str[i] = '\0';
+	return (str);
 }

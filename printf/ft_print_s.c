@@ -12,14 +12,19 @@
 
 #include "ft_printf.h"
 
-int	ft_print_s(char *c)
+int	ft_print_s(char *c, int *verification)
 {
 	int	i;
 
 	i = 0;
+	if (c == NULL)
+	{
+		ft_print_s("(null)", verification);
+		return (6);
+	}
 	while (c[i])
 	{
-		ft_putchar(c[i]);
+		ft_print_c(c[i], verification);
 		i++;
 	}
 	return (i);

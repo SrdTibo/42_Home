@@ -6,15 +6,15 @@
 /*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 10:30:55 by tserdet           #+#    #+#             */
-/*   Updated: 2022/12/08 13:49:21 by tserdet          ###   ########.fr       */
+/*   Updated: 2022/12/08 15:31:23 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*read_join(int	fd, char *stat)
+char	*read_join(int fd, char *stat)
 {
-	int 	result_read;
+	int		result_read;
 	char	buf[BUFFER_SIZE + 1];
 	int		check;
 
@@ -23,8 +23,15 @@ char	*read_join(int	fd, char *stat)
 	while (check == 0 && result_read > 0)
 	{
 		result_read = read(fd, buf, BUFFER_SIZE);
+		if (result_read < 0)
+		{
+			free(stat);
+			return (NULL);
+		}
 		buf[result_read] = '\0';
 		stat = ft_strjoin(stat, buf);
+		if (stat == NULL)
+			return (NULL);
 		check = check_slash_n(stat);
 	}
 	return (stat);
@@ -33,31 +40,28 @@ char	*read_join(int	fd, char *stat)
 char	*return_line(char *stat)
 {
 	int		i;
-	int		j;
 	char	*one_line;
 
 	i = 0;
-	j = 0;
 	if (!stat || stat[i] == '\0')
 		return (NULL);
 	while (stat[i] != '\n' && stat[i] != '\0')
 		i++;
 	if (stat[i] == '\n')
 		i += 1;
-	one_line = ft_calloc(sizeof(char) , i + 1);
-	i = 0;
-	while (stat[i] != '\0' && stat[i] != '\n')
-	{
+	one_line = ft_calloc(sizeof(char), i + 1);
+	if (one_line == NULL)
+		return (NULL);
+	i = -1;
+	while (stat[++i] != '\0' && stat[i] != '\n')
 		one_line[i] = stat[i];
-		i++;
-	}
 	if (stat[i] == '\n')
 	{
 		one_line[i] = stat[i];
 		i++;
 	}
 	one_line[i] = '\0';
-	return(one_line);
+	return (one_line);
 }
 
 char	*clear_stat(char	*stat, char *final_line_result)
@@ -69,52 +73,48 @@ char	*clear_stat(char	*stat, char *final_line_result)
 
 	i = 0;
 	t = 0;
+	if (!stat)
+		return (NULL);
 	size_rest = ft_strlen(stat) - ft_strlen(final_line_result);
 	rest = malloc(size_rest * sizeof(char) + 1);
 	if (!rest || !stat || !final_line_result)
 		return (NULL);
-	while(stat[i] != '\0' && stat[i] != '\n')
+	while (stat[i] != '\0' && stat[i] != '\n')
 		i++;
-	i++;
+	if (stat[i] == '\n')
+		i++;
 	while (stat[i] != '\0')
 		rest[t++] = stat[i++];
 	rest[t] = '\0';
-	free(stat);
-	return(rest);
+	if (stat)
+		free(stat);
+	return (rest);
 }
 
 char	*get_next_line(int fd)
 {
 	int				i;
-	static	char	*stat;
+	static char		*stat;
 	char			*final_line_result;
 
 	i = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return(NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	stat = read_join(fd, stat);
+	if (stat == NULL)
+		return (NULL);
 	final_line_result = return_line(stat);
 	if (final_line_result == NULL)
 	{
 		if (stat)
+		{
 			free(stat);
+			stat = NULL;
+		}
 		return (NULL);
 	}
 	stat = clear_stat(stat, final_line_result);
-	return(final_line_result);
+	if (stat == NULL)
+		return (NULL);
+	return (final_line_result);
 }
-
-// int main()
-// {
-
-// 	int fd = open("test.txt", O_RDONLY);
-// 	char *line;
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd);
-// 		if (line == NULL)
-// 		break;
-// 		printf("%s", line);
-// 	}
-// 	return 0;
-// }

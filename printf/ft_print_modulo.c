@@ -12,11 +12,11 @@
 
 #include "ft_printf.h"
 
-int	ft_print_modulo(void)
+int	ft_print_modulo(int *verification)
 {
 	char	a;
 
 	a = '%';
-	ft_putchar(a);
+	ft_print_c(a, verification);
 	return (1);
 }

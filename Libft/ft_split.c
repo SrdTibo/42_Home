@@ -10,103 +10,117 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
-#include <stdlib.h>
 
-int nmbr_colums(char const *s, char sep)
+static	char	**ft_free_malloc(char **tab, int pos)
 {
 	int	i;
-	int compt;
+
+	i = 0;
+	while (i < pos)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	return (0);
+}
+
+static	int	ft_alloc_nb_col(const char *s, char c)
+{
+	int	i;
+	int	compt;
 
 	i = 0;
 	compt = 0;
 	while (s[i] != '\0')
 	{
-		if(s[i] == sep)
+		if (s[i] == c)
 			i++;
 		else
 		{
-			compt+=1;
-			while(s[i] != sep && s[i])
+			compt += 1;
+			while (s[i] != c && s[i])
 				i++;
 		}
 	}
-	return(compt);
+	return (compt);
 }
 
-char **alloc_lignes(char const *s, char sep, char **tab)
+static	char	**ft_alloc_taille_totale(const char *s, char c, char **tab)
 {
 	int	i;
-	int compt;
-	int t;
+	int	compteur;
+	int	j;
 
-	t = 0;
-	i = 0;
-	compt = 0;
-	tab = malloc(nmbr_colums(s, sep) * sizeof(char *));
-	if (tab == NULL)
-		return(0);
-	while(i < nmbr_colums(s, sep))
+	i = -1;
+	j = 0;
+	compteur = 0;
+	while (s[++i])
 	{
-		compt = 0;
-		while(s[t] == sep)
-			t++;
-		while(s[t] != sep && s[t] != '\0')
+		if (s[i] != c)
+			compteur++;
+		if (((s[i - 1] != c && i > 0) && s[i] == c)
+			|| (s[i + 1] == '\0' && s[i] != c))
 		{
-			compt++;
-			t++;
+			tab[j] = malloc(sizeof(char) * (compteur + 1));
+			if (tab[j] == NULL)
+				return (ft_free_malloc(tab, j));
+			compteur = 0;
+			j++;
 		}
-		tab[i++] = malloc((compt) * sizeof(char));
 	}
-	return(tab);
+	return (tab);
 }
 
-char	**allocation(char const *s, char sep, char **tab)
+static	char	**ft_alloc_mots(const char *s, char c, char **tab)
 {
 	int	i;
-	int	t;
-	int x;
-	int compt;
+	int	j;
+	int	compteur;
 
 	i = 0;
-	x = 0;
-	compt = nmbr_colums(s, sep);
-	t = 0;
-	while (i < compt)
+	j = 0;
+	compteur = 0;
+	while (s[i])
 	{
-		while(s[t] == sep)
-			t++;
+		if (s[i] != c)
+			tab[j][compteur++] = s[i];
+		else if (s[i - 1] != c && i > 0)
 		{
-			while(s[t] != sep && s[t])
-			{
-				tab[i][x] = s[t];
-				t++;
-				x++;
-			}
+			tab[j][compteur] = 0;
+			j++;
+			compteur = 0;
 		}
-		tab[i][x] = '\0';
+		if (s[i + 1] == '\0' && s[i] != c)
+			tab[j][compteur] = 0;
 		i++;
-		x = 0;
 	}
-	return(tab);
+	return (tab);
 }
 
-char **ft_split(char const *s, char sep)
+char	**ft_split(char const *s, char c)
 {
-	char **tab = NULL;
-	int	i;
+	char	**tab;
+	int		taille;
 
-	i = 0;
-	tab = alloc_lignes(s, sep, tab);
-	tab = allocation(s, sep, tab);
-	if(tab == NULL || nmbr_colums (s, sep) == 0)
+	if (s == NULL)
+		return (NULL);
+	taille = ft_alloc_nb_col(s, c);
+	if (!*s)
 	{
-		while(i < nmbr_colums(s, sep))
-			free(tab[i]);
-			i++;
+		tab = malloc(sizeof(char *) * 1);
+		if (tab == NULL)
+			return (NULL);
+		tab[0] = 0;
+		return (tab);
 	}
-	else
-	{
-		return(tab);
-	}
-	return(tab);
+	tab = malloc(sizeof(char *) * (taille + 1));
+	if (tab == NULL)
+		return (NULL);
+	tab = ft_alloc_taille_totale(s, c, tab);
+	if (tab == NULL)
+		return (NULL);
+	tab = ft_alloc_mots(s, c, tab);
+	tab[taille] = NULL;
+	return (tab);
 }

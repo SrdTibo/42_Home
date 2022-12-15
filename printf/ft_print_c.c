@@ -12,7 +12,14 @@
 
 #include "ft_printf.h"
 
-int	ft_print_c(char c)
+int	ft_print_c(char c, int *verification)
 {
-	return(ft_putchar(c));
+	int	number;
+
+	number = 1;
+	if (*verification != -1)
+		number = write(1, &c, 1);
+	if (number == -1)
+		*verification = -1;
+	return (number);
 }

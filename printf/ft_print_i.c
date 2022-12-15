@@ -12,12 +12,12 @@
 
 #include "ft_printf.h"
 
-static	void	convertion(int p)
+static	void	convertion(int p, int *verification)
 {
 	char	n;
 
 	n = 48 + p;
-	ft_print_c(n);
+	ft_print_c(n, verification);
 }
 
 static	int	nbr_figure(int n)
@@ -38,24 +38,31 @@ static	int	nbr_figure(int n)
 	return (count);
 }
 
-int	ft_print_i(int nb)
+int	ft_print_i(int nb, int *verification)
 {
 	int	o;
 	int	p;
+	int	nmbr_figure;
 
+	nmbr_figure = nbr_figure(nb);
+	if (nb == -2147483647 -1)
+	{
+		ft_print_s("-2147483648", verification);
+		return (11);
+	}
 	if (nb < 0)
 	{
-		ft_print_c('-');
+		ft_print_c('-', verification);
 		nb = nb * -1;
 	}
 	if ((nb > -1) && (nb < 10))
-		convertion(nb);
+		convertion(nb, verification);
 	else
 	{
 		o = nb / 10;
 		p = nb % 10;
-		ft_print_i(o);
-		convertion(p);
+		ft_print_i(o, verification);
+		convertion(p, verification);
 	}
-	return (nbr_figure(nb));
+	return (nmbr_figure);
 }

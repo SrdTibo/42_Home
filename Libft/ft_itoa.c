@@ -10,57 +10,97 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//http://villemin.gerard.free.fr/aInforma/081Chiff.htm
 #include "libft.h"
-#include <stdlib.h>
 
-int nombre_chiffre(int n)
+int	nombre_chiffre(int n)
 {
-   	int count;
+	int	count;
 
 	count = 0;
-   	while(n!=0)  
-   	{  
-   	    n=n/10;  
-   	    count++;
-   	}
-	return(count);
-}  
+	if (n <= 0)
+	{
+		count++;
+		n = n * -1;
+	}
+	while (n != 0)
+	{
+		n = n / 10;
+		count++;
+	}
+	return (count);
+}
 
 char	convertion(int p)
 {
 	char	n;
 
 	n = 48 + p;
-	return(n);
+	return (n);
 }
 
-char *ft_itoa(int n)
+char	*strcpyy(char *dest, char *src)
 {
-	char *str;
-	int	o;
-	int	p;
-	int	i;
+	int		i;
 
 	i = 0;
-	str = malloc(sizeof(char) * n);
-	if (str == NULL)
-		return(0);
-	if (n < 0)
-		{
-			str[i] = '-';
-			i++;
-			n = n * -1;
-		}
-	while(i < nombre_chiffre(n))
+	if (dest == NULL)
+		return (0);
+	while (src[i])
 	{
-		if ((n >= 0) && (n < 10))
-			str[i++] = convertion(n);
-		else
-		{
-			o = n / 10;
-			p = n % 10;
-			str[i++] = convertion(p);
-		}
+		dest[i] = src[i];
+		i++;
 	}
-	return(str);
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	*cas_part(int m)
+{	
+	char	*str;
+
+	if (m == 0 || m == -0)
+	{
+		str = malloc(sizeof(char) * 2);
+		if (str == NULL)
+			return (0);
+		strcpyy(str, "0");
+	}
+	if (m == -2147483648)
+	{
+		str = malloc(sizeof(char) * 12);
+		if (str == NULL)
+			return (0);
+		strcpyy(str, "-2147483648");
+	}
+	return (str);
+}
+
+char	*ft_itoa(int m)
+{
+	char	*str;
+	int		c;
+	int		i;
+
+	i = nombre_chiffre(m);
+	if (m != 0 && m != -0 && m != -2147483648)
+	{
+		str = malloc(sizeof(char) * nombre_chiffre(m) + 1);
+		if (str == NULL)
+			return (0);
+		str[nombre_chiffre(m)] = '\0';
+		if (m < 0)
+		{
+			str[0] = '-';
+			m = -m;
+		}
+		while (m > 0)
+		{
+			c = m % 10;
+			str[--i] = convertion(c);
+			m = (m - c) / 10;
+		}
+		return (str);
+	}
+	return (cas_part(m));
 }
