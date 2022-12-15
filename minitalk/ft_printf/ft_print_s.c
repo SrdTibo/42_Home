@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/15 10:20:36 by tserdet           #+#    #+#             */
-/*   Updated: 2022/12/15 14:40:41 by tserdet          ###   ########.fr       */
+/*   Created: 2022/10/31 15:45:57 by tserdet           #+#    #+#             */
+/*   Updated: 2022/10/31 16:21:07 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <signal.h>
+#include "ft_printf.h"
 
-void display()
+int	ft_print_s(char *c, int *verification)
 {
-	write(1 , "1", 1);
-}
+	int	i;
 
-int main()
-{
-	int	pid;
-
-	pid = getpid();
-	ft_printf("Server PID = %d\n", pid);
-	ft_printf("waiting...\n");
-	signal(SIGUSR1,	display);
-	while (1)
-		continue;
-	return (0);
+	i = 0;
+	if (c == NULL)
+	{
+		ft_print_s("(null)", verification);
+		return (6);
+	}
+	while (c[i])
+	{
+		ft_print_c(c[i], verification);
+		i++;
+	}
+	return (i);
 }

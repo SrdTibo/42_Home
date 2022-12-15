@@ -8,11 +8,11 @@ OBJ	= $(SRC:.c=.o)
 
 all : 		$(NAME)
 	
-$(NAME) : 	$(OBJ)
+$(NAME) : $(OBJ)
 	ar -rcs $(NAME) $(OBJ)
 
 clean :
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) a.out
 
 fclean :	clean
 	rm -f $(NAME)
