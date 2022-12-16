@@ -15,6 +15,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
+#include "ft_printf/ft_printf.c"
 
 void	descaling_bits(char character, int pid)
 {
