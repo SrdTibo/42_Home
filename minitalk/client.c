@@ -15,8 +15,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
-#include "ft_printf/ft_printf.h"
-
 
 void	descaling_bits(char character, int pid)
 {
@@ -67,11 +65,11 @@ int main(int argc, char **argv)
 {
 	int	pid;
 	int	i;
-	
-	i = 0;
-	pid = ft_atoi(argv[1]);
+
 	if (argc == 3)
 	{
+		i = 0;
+		pid = ft_atoi(argv[1]);
 		while (argv[2][i] != '\0')
 		{
 			descaling_bits(argv[2][i], pid);
@@ -79,6 +77,6 @@ int main(int argc, char **argv)
 		}
 	}
 	else
-		printf("MiniTalk take 3 parameters: <executable> <server> <string>");
+		ft_printf("MiniTalk take 3 parameters: <executable> <server> <string>\n");
 	return (0);
 }

@@ -1,18 +1,36 @@
-NAME = minitalk.a
+NAME = libftprintf.a
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC	= client.c server.c\
+FT_PRINTF	= ft_printf/ft_extra_function.c \
+				ft_printf/ft_print_c.c \
+				ft_printf/ft_print_d.c \
+				ft_printf/ft_printf.c \
+	  			ft_printf/ft_print_i.c \
+				ft_printf/ft_print_modulo.c \
+				ft_printf/ft_print_p.c \
+				ft_printf/ft_print_s.c\
+	  			ft_printf/ft_print_u.c \
+				ft_printf/ft_print_x.c \
+				ft_printf/ft_print_xbis.c \
 
-OBJ	= $(SRC:.c=.o)
+CLIENT = client.c
+
+SERVER = server.c
+
+OBJ_FT_PRINTF	= $(FT_PRINTF:.c=.o)
+
+OBJ_CLIENT	= $(CLIENT:.c=.o)
+
+OBJ_SERVER	= $(SERVER:.c=.o)
 
 all : 		$(NAME)
 	
-$(NAME) : $(OBJ)
-	ar -rcs $(NAME) $(OBJ)
+$(NAME) : 	$(OBJ_FT_PRINTF) $(OBJ_CLIENT) $(OBJ_SERVER)
+	ar -rcs $(NAME) $(OBJ_FT_PRINTF) $(OBJ_CLIENT) $(OBJ_SERVER)
 
 clean :
-	rm -rf $(OBJ) a.out
+	rm -rf $(OBJ_FT_PRINTF) $(OBJ_CLIENT) $(OBJ_SERVER)
 
 fclean :	clean
 	rm -f $(NAME)

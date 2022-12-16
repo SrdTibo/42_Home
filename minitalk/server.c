@@ -15,7 +15,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
-#include "ft_printf/ft_printf.h"
 
 void display(int sig)
 {
@@ -39,8 +38,8 @@ int main()
 	int	pid;
 
 	pid = getpid();
-	printf("Server PID = %d\n", pid);
-	printf("waiting...\n");
+	ft_printf("Server PID = %d\n", pid);
+	ft_printf("waiting...\n");
 	signal(SIGUSR1,	display);
 	signal(SIGUSR2,	display);
 	while (1)
