@@ -6,7 +6,7 @@
 /*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 10:20:36 by tserdet           #+#    #+#             */
-/*   Updated: 2022/12/16 14:27:04 by tserdet          ###   ########.fr       */
+/*   Updated: 2022/12/16 14:29:47 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
-#include "../ft_printf/ft_printf.c"
+#include "../ft_printf/ft_printf.h"
 
 void display(int sig)
 {
