@@ -15,10 +15,23 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
+#include "ft_printf/ft_printf.h"
 
-void display()
+void display(int sig)
 {
-	write(1 , "1\n", 1);
+	static char cha = 0;
+	static int	compt = 0;
+
+	cha <<= 1;
+	if (sig == SIGUSR1)
+		cha+=1;
+	compt++;
+	if (compt == 8)
+	{
+		write(1 , &cha, 1);
+		cha = 0;
+		compt = 0;
+	}
 }
 
 int main()
@@ -31,6 +44,6 @@ int main()
 	signal(SIGUSR1,	display);
 	signal(SIGUSR2,	display);
 	while (1)
-		continue;
+		pause();
 	return (0);
 }

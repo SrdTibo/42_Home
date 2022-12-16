@@ -15,6 +15,24 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
+#include "ft_printf/ft_printf.h"
+
+
+void	descaling_bits(char character, int pid)
+{
+	int	i;
+
+	i = 7;
+	while (i >= 0)
+	{
+		if (character & (1 << i))
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		usleep(100);
+		i--;
+	}
+}
 
 int	ft_atoi(const char *thestring)
 {
@@ -47,11 +65,20 @@ int	ft_atoi(const char *thestring)
 
 int main(int argc, char **argv)
 {
-	(void)argc;
 	int	pid;
+	int	i;
 	
+	i = 0;
 	pid = ft_atoi(argv[1]);
-	kill(pid, SIGUSR1);
-	kill(pid, SIGUSR2);
+	if (argc == 3)
+	{
+		while (argv[2][i] != '\0')
+		{
+			descaling_bits(argv[2][i], pid);
+			i++;
+		}
+	}
+	else
+		printf("MiniTalk take 3 parameters: <executable> <server> <string>");
 	return (0);
 }
