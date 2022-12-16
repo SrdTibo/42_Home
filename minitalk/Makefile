@@ -6,7 +6,7 @@
 #    By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/16 14:13:31 by tserdet           #+#    #+#              #
-#    Updated: 2022/12/16 14:23:33 by tserdet          ###   ########.fr        #
+#    Updated: 2022/12/16 14:42:40 by tserdet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SERVER	= ft_server/server.c\
 FT_PRINTF = ft_printf/ft_extra_function.c ft_printf/ft_print_c.c ft_printf/ft_print_d.c \
 			ft_printf/ft_print_i.c ft_printf/ft_print_modulo.c \
 			ft_printf/ft_print_p.c ft_printf/ft_print_s.c ft_printf/ft_print_u.c \
-			ft_printf/ft_print_x.c ft_printf/ft_print_xbis.c\
+			ft_printf/ft_print_x.c ft_printf/ft_print_xbis.c ft_printf/ft_printf.c\
 
 PRINTF_OBJ	= $(FT_PRINTF:.c=.o)
 

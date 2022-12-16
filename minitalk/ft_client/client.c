@@ -6,7 +6,7 @@
 /*   By: tserdet <tserdet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 10:20:40 by tserdet           #+#    #+#             */
-/*   Updated: 2022/12/16 14:29:43 by tserdet          ###   ########.fr       */
+/*   Updated: 2022/12/16 14:43:33 by tserdet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_atoi(const char *thestring)
 	return (valeur);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int	pid;
 	int	i;
@@ -78,6 +78,6 @@ int main(int argc, char **argv)
 		}
 	}
 	else
-		ft_printf("MiniTalk take 3 parameters: <executable> <server> <string>\n");
+		ft_printf("parameters: <executable> <server> <string>\n");
 	return (0);
 }
